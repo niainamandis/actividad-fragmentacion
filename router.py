@@ -118,6 +118,7 @@ if __name__ == "__main__":
   print("router_puerto:", router_puerto)
   print("router_rutas:", router_rutas)
 
+  """
   # paquete de prueba manual
   IP_packet_v1 = (bytes([127, 0, 0, 1])
     + (8881).to_bytes(2, "big")   # puerto
@@ -150,7 +151,7 @@ if __name__ == "__main__":
   for fragmento in fragment_list:
     parsed_fragmento = parse_packet(fragmento)
     print("offset: {}, tamano: {}, flag: {}, largo total: {}".format(parsed_fragmento["offset"], parsed_fragmento["tamano"], parsed_fragmento["flag"], len(fragmento)))
-
+    """
 
   # crea el socket udp
   router_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -186,7 +187,11 @@ if __name__ == "__main__":
         parsed_IP_packet["ttl"] -= 1
         # recrea el paquete con el nuevo ttl
         IP_packet = create_packet(parsed_IP_packet)
-        # informa el forward
-        print("redirigiendo paquete {} con destino final {} desde {} hacia {}".format(IP_packet, destination_address, router_address, next_hop_address))
-        # reenvía el paquete al siguiente salto
-        router_socket.sendto(IP_packet, next_hop_address)
+        # fragmenta el paquete según el mtu de la ruta
+        fragment_list = fragment_IP_packet(IP_packet, MTU)
+        # recorre cada fragmento
+        for fragmento in fragment_list:
+          # informa el forward
+          print("redirigiendo paquete {} con destino final {} desde {} hacia {}".format(fragmento, destination_address, router_address, next_hop_address))
+          # reenvía el fragmento al siguiente salto
+          router_socket.sendto(fragmento, next_hop_address)
