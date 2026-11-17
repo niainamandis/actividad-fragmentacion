@@ -41,6 +41,7 @@ def check_routes(routes_file_name: str, destination_address: tuple[str, int]) ->
   # ip de destino a entero
   destination_num = int.from_bytes(bytes(int(num) for num in destination_ip.split(".")), "big")
 
+
   rutas_posibles = []
 
   with open(routes_file_name) as archivo:
@@ -73,8 +74,8 @@ def check_routes(routes_file_name: str, destination_address: tuple[str, int]) ->
   ruta_elegida = rutas_area[turno % len(rutas_area)] #ruta correspondiente
   # avanza el turno del área
   rutas_visitadas[area] = turno + 1
-  # siguiente salto
-  return (ruta_elegida[3], int(ruta_elegida[4]))
+  # siguiente salto y mtu
+  return (ruta_elegida[3], int(ruta_elegida[4])), int(ruta_elegida[5])
 
 if __name__ == "__main__":
   
@@ -86,6 +87,7 @@ if __name__ == "__main__":
   print("router_puerto:", router_puerto)
   print("router_rutas:", router_rutas)
 
+  """
   # paquete de prueba manual
   IP_packet_v1 = (bytes([127, 0, 0, 1])
     + (8881).to_bytes(2, "big")   # puerto
@@ -99,6 +101,7 @@ if __name__ == "__main__":
   IP_packet_v2 = create_packet(parsed_IP_packet)
   # verificar que ambos paquetes sean iguales
   print("IP_packet_v1 == IP_packet_v2 ? {}".format(IP_packet_v1 == IP_packet_v2))
+  """
 
   # crea el socket udp
   router_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -121,13 +124,15 @@ if __name__ == "__main__":
       # imprime mensaje sin headers
       print(parsed_IP_packet["mensaje"].decode())
     else:
-      # busca el siguiente salto
-      next_hop_address = check_routes(router_rutas, destination_address)
-      # si existe una ruta
-      if next_hop_address is None:
+      # busca la ruta con siguiente salto y mtu
+      ruta = check_routes(router_rutas, destination_address)
+      # si no existe una ruta
+      if ruta is None:
         # ignora el paquete
         print("No hay rutas hacia {} para paquete {}".format(destination_address, IP_packet))
       else:
+        # separa el siguiente salto y el mtu
+        next_hop_address, MTU = ruta
         # decrementa el ttl en 1 antes del forward
         parsed_IP_packet["ttl"] -= 1
         # recrea el paquete con el nuevo ttl
@@ -136,4 +141,3 @@ if __name__ == "__main__":
         print("redirigiendo paquete {} con destino final {} desde {} hacia {}".format(IP_packet, destination_address, router_address, next_hop_address))
         # reenvía el paquete al siguiente salto
         router_socket.sendto(IP_packet, next_hop_address)
-
