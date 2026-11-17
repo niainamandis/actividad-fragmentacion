@@ -77,6 +77,37 @@ def check_routes(routes_file_name: str, destination_address: tuple[str, int]) ->
   # siguiente salto y mtu
   return (ruta_elegida[3], int(ruta_elegida[4])), int(ruta_elegida[5])
 
+def fragment_IP_packet(IP_packet, MTU):
+  # si cabe en el mtu
+  if len(IP_packet) <= MTU:
+    # retorna el paquete sin fragmentar
+    return [IP_packet]
+  # parsea el paquete
+  parsed_IP_packet = parse_packet(IP_packet)
+  mensaje = parsed_IP_packet["mensaje"]
+  tamano_header = len(IP_packet) - len(mensaje)
+  tamano_trozo = MTU - tamano_header
+  fragmentos = []
+  # recorre el mensaje en trozos
+  for inicio in range(0, len(mensaje), tamano_trozo):
+    trozo = mensaje[inicio:inicio + tamano_trozo]
+    # copia el header del paquete original
+    fragmento = dict(parsed_IP_packet)
+    # suma el offset original al del trozo
+    fragmento["offset"] = parsed_IP_packet["offset"] + inicio
+    # actualiza el tamaño y el mensaje
+    fragmento["tamano"] = len(trozo)
+    fragmento["mensaje"] = trozo
+    # flag en 1 si quedan trozos después de este
+    if inicio + tamano_trozo < len(mensaje):
+      fragmento["flag"] = 1
+    # en el último trozo conserva el flag original
+    else:
+      fragmento["flag"] = parsed_IP_packet["flag"]
+    # guarda el fragmento en bytes
+    fragmentos.append(create_packet(fragmento))
+  return fragmentos
+
 if __name__ == "__main__":
   
   router_IP = sys.argv[1]
@@ -87,7 +118,6 @@ if __name__ == "__main__":
   print("router_puerto:", router_puerto)
   print("router_rutas:", router_rutas)
 
-  """
   # paquete de prueba manual
   IP_packet_v1 = (bytes([127, 0, 0, 1])
     + (8881).to_bytes(2, "big")   # puerto
@@ -100,8 +130,27 @@ if __name__ == "__main__":
   parsed_IP_packet = parse_packet(IP_packet_v1)
   IP_packet_v2 = create_packet(parsed_IP_packet)
   # verificar que ambos paquetes sean iguales
-  print("IP_packet_v1 == IP_packet_v2 ? {}".format(IP_packet_v1 == IP_packet_v2))
-  """
+  # print("IP_packet_v1 == IP_packet_v2 ? {}".format(IP_packet_v1 == IP_packet_v2))
+
+  # test de fragmentación: paquete que cabe en el mtu
+  fragment_list = fragment_IP_packet(IP_packet_v1, 50)
+  print("largo de la lista con paquete que cabe: {}".format(len(fragment_list)))
+  # test de fragmentación: paquete de 150 bytes con mtu 50
+  IP_packet_150 = (bytes([127, 0, 0, 1])
+    + (8885).to_bytes(2, "big")   # puerto
+    + (10).to_bytes(1, "big")     # ttl
+    + (347).to_bytes(4, "big")    # id
+    + (0).to_bytes(4, "big")      # offset
+    + (130).to_bytes(4, "big")    # tamaño
+    + (0).to_bytes(1, "big")      # flag
+    + b"a" * 130)
+  fragment_list = fragment_IP_packet(IP_packet_150, 50)
+  print("largo de la lista con paquete de 150 bytes: {}".format(len(fragment_list)))
+  # muestra offset, tamaño y flag de cada fragmento
+  for fragmento in fragment_list:
+    parsed_fragmento = parse_packet(fragmento)
+    print("offset: {}, tamano: {}, flag: {}, largo total: {}".format(parsed_fragmento["offset"], parsed_fragmento["tamano"], parsed_fragmento["flag"], len(fragmento)))
+
 
   # crea el socket udp
   router_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
