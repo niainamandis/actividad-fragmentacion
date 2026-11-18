@@ -4,6 +4,9 @@ import socket
 # guarda el próximo turno de round-robin de cada área
 rutas_visitadas = {}
 
+# lista de fragmentos recibidos de cada id
+fragmentos_recibidos = {}
+
 def parse_packet(IP_packet: bytes):
   # ip en los primeros 4 bytes
   ip = ".".join(str(byte) for byte in IP_packet[0:4])
@@ -156,7 +159,7 @@ if __name__ == "__main__":
 
   # test de reensamblaje: fragmenta y reensambla el paquete de 150 bytes
   IP_packet_v2 = reassemble_IP_packet(fragment_list)
-  print("IP_packet_v1 = IP_packet_v2 ? {}".format(IP_packet_v1 == IP_packet_v2))
+  # print("IP_packet_v1 = IP_packet_v2 ? {}".format(IP_packet_v1 == IP_packet_v2))
 
   # crea el socket udp
   router_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -176,6 +179,8 @@ if __name__ == "__main__":
       print("Se recibió paquete {} con TTL 0".format(IP_packet))
     # si el paquete es para este router
     elif destination_address == router_address:
+      # guarda el paquete 
+      fragmentos_recibidos.setdefault(parsed_IP_packet["id"], []).append(IP_packet)
       # imprime mensaje sin headers
       print(parsed_IP_packet["mensaje"].decode())
     else:
