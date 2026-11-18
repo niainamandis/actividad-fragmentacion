@@ -181,8 +181,10 @@ if __name__ == "__main__":
     elif destination_address == router_address:
       # guarda el paquete 
       fragmentos_recibidos.setdefault(parsed_IP_packet["id"], []).append(IP_packet)
-      # imprime mensaje sin headers
-      print(parsed_IP_packet["mensaje"].decode())
+      # intenta reensamblar los fragmentos del id
+      paquete_completo = reassemble_IP_packet(fragmentos_recibidos[parsed_IP_packet["id"]])
+      if paquete_completo is not None:
+        print(parse_packet(paquete_completo)["mensaje"].decode())
     else:
       # busca la ruta con siguiente salto y mtu
       ruta = check_routes(router_rutas, destination_address)
