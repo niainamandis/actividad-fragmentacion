@@ -1,0 +1,3 @@
+router_IP: 127.0.0.1
+router_puerto: 8881
+router_rutas: rutas_R1_v3_mtu.txt

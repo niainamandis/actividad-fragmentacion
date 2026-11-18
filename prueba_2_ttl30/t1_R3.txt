@@ -1,0 +1,20 @@
+router_IP: 127.0.0.1
+router_puerto: 8883
+router_rutas: rutas_R3_v3_mtu.txt
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbc\x00\x00\x00\x00\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbc\x00\x00\x00\x1e\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbc\x00\x00\x00<\x00\x00\x00\x14\x01aaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbd\x00\x00\x00\x00\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbd\x00\x00\x00\x1e\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbd\x00\x00\x00<\x00\x00\x00\x14\x01aaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbe\x00\x00\x00\x00\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbe\x00\x00\x00\x1e\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x1b\x00\x00\x02\xbe\x00\x00\x00<\x00\x00\x00\x14\x01aaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x19\x00\x00\x02\xbc\x00\x00\x00\x00\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x19\x00\x00\x02\xbd\x00\x00\x00\x1e\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x19\x00\x00\x02\xbe\x00\x00\x00<\x00\x00\x00\x14\x01aaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x17\x00\x00\x02\xbd\x00\x00\x00\x1e\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x17\x00\x00\x02\xbe\x00\x00\x00\x00\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x17\x00\x00\x02\xbe\x00\x00\x00P\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x17\x00\x00\x02\xbe\x00\x00\x00n\x00\x00\x00\x14\x00aaaaaaaaaaaaaaaaaaa\n' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8885)
+redirigiendo paquete b'\x7f\x00\x00\x01"\xb5\x13\x00\x00\x02\xbe\x00\x00\x00P\x00\x00\x00\x1e\x01aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' con destino final ('127.0.0.1', 8885) desde ('127.0.0.1', 8883) hacia ('127.0.0.1', 8882)

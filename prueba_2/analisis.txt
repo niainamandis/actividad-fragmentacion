@@ -1,0 +1,36 @@
+=== test 1 (origen R1) ===
+  R1: reenviados: 6 | sobre mtu: 0 | ttl minimo: 9 | descartes por TTL 0: 0
+  R2: reenviados: 24 | sobre mtu: 0 | ttl minimo: 0 | descartes por TTL 0: 0
+  R3: reenviados: 15 | sobre mtu: 0 | ttl minimo: 1 | descartes por TTL 0: 0
+  R4: reenviados: 8 | sobre mtu: 0 | ttl minimo: 3 | descartes por TTL 0: 1
+  R5: mensajes completos: 2 | descartes por TTL 0: 0
+  id 700: re-fragmentación: sí
+  id 701: re-fragmentación: sí
+  id 702: re-fragmentación: sí
+=== test 2 (origen R2) ===
+  R1: reenviados: 0 | sobre mtu: 0 | ttl minimo: None | descartes por TTL 0: 0
+  R2: reenviados: 26 | sobre mtu: 0 | ttl minimo: 3 | descartes por TTL 0: 0
+  R3: reenviados: 16 | sobre mtu: 0 | ttl minimo: 2 | descartes por TTL 0: 0
+  R4: reenviados: 10 | sobre mtu: 0 | ttl minimo: 2 | descartes por TTL 0: 0
+  R5: mensajes completos: 3 | descartes por TTL 0: 0
+  id 800: re-fragmentación: no
+  id 801: re-fragmentación: no
+  id 802: re-fragmentación: no
+=== test 3 (origen R3) ===
+  R1: reenviados: 0 | sobre mtu: 0 | ttl minimo: None | descartes por TTL 0: 0
+  R2: reenviados: 20 | sobre mtu: 0 | ttl minimo: 0 | descartes por TTL 0: 0
+  R3: reenviados: 24 | sobre mtu: 0 | ttl minimo: 1 | descartes por TTL 0: 0
+  R4: reenviados: 9 | sobre mtu: 0 | ttl minimo: 3 | descartes por TTL 0: 1
+  R5: mensajes completos: 2 | descartes por TTL 0: 0
+  id 900: re-fragmentación: no
+  id 901: re-fragmentación: no
+  id 902: re-fragmentación: no
+=== test 4 (origen R4) ===
+  R1: reenviados: 0 | sobre mtu: 0 | ttl minimo: None | descartes por TTL 0: 0
+  R2: reenviados: 17 | sobre mtu: 0 | ttl minimo: 2 | descartes por TTL 0: 0
+  R3: reenviados: 10 | sobre mtu: 0 | ttl minimo: 1 | descartes por TTL 0: 0
+  R4: reenviados: 15 | sobre mtu: 0 | ttl minimo: 1 | descartes por TTL 0: 0
+  R5: mensajes completos: 3 | descartes por TTL 0: 0
+  id 1000: re-fragmentación: sí
+  id 1001: re-fragmentación: no
+  id 1002: re-fragmentación: sí
